@@ -8,10 +8,17 @@ function App() {
   let [homeScore, setHomeScore] = useState(0)
   const [awayScore, setAwayScore] = useState(0)
 
-  const homeTouchDown = () => setHomeScore(homeScore + 7)
-  const homeFieldGoal = () => setHomeScore(homeScore + 3)
-  const awayTouchDown = () => setAwayScore(awayScore + 7)
-  const awayFieldGoal = () => setAwayScore(awayScore + 3)
+  const handler = (teamName, points) => {
+    // eslint-disable-next-line default-case
+    switch(teamName) {
+      case 'home':
+        setHomeScore(homeScore + points)
+        break
+      case 'away':
+        setAwayScore(awayScore + points)
+        break
+    }
+  }
 
   return (
     <div className="container">
@@ -35,12 +42,12 @@ function App() {
         <div className="homeButtons">
 
           {/* TODO STEP 4 - Now we need to attach our state setter functions to click listeners. */}
-          <button onClick={homeTouchDown} className="homeButtons__touchdown">Home Touchdown</button>
-          <button onClick={homeFieldGoal} className="homeButtons__fieldGoal">Home Field Goal</button>
+          <button onClick={() => handler('home', 7)} className="homeButtons__touchdown">Home Touchdown</button>
+          <button onClick={() => handler('home', 3)} className="homeButtons__fieldGoal">Home Field Goal</button>
         </div>
         <div className="awayButtons">
-          <button onClick={awayTouchDown} className="awayButtons__touchdown">Away Touchdown</button>
-          <button onClick={awayFieldGoal} className="awayButtons__fieldGoal">Away Field Goal</button>
+          <button onClick={() => handler('away', 7)} className="awayButtons__touchdown">Away Touchdown</button>
+          <button onClick={() => handler('away', 7)} className="awayButtons__fieldGoal">Away Field Goal</button>
         </div>
       </section>
     </div>
